@@ -1,0 +1,15 @@
+static_variables:
+  grid:
+    type: "uniform"
+    dimensions: [30, 30, 30]  # nx, ny, nz
+    spacing: [10.0, 10.0, 2.0]  # dx, dy, dz in meters
+  
+    # If using non-uniform grid, specify the size of each grid block individually
+    # spacing_x: [10.0, 12.0, 8.0, ...]  # List of dx for each grid block in x-direction
+    # spacing_y: [10.0, 9.0, 11.0, ...]  # List of dy for each grid block in y-direction
+    # spacing_z: [2.0, 3.0, 1.5, ...]   # List of dz for each grid block in z-direction
+
+    null_blocks: [] # List of blocks to be treated as null (e.g., [[x1,y1,z1], [x2,y2,z2], ...])
+  
+  physical_properties:
+  
