@@ -1,0 +1,487 @@
+** 2022-01-18, 17:11:12, ziming4
+** 2022-03-07, 19:29:23, ziming4
+** 2022-07-21, 23:54:21, ziming4
+** 2022-07-23, 00:02:49, ziming4
+** 2024-11-28, 16:33:47, ziming4
+** 2024-11-28, 16:38:57, ziming4
+** 2024-11-28, 16:51:47, ziming4
+** 2025-02-13, 12:45:38, ziming4
+** 2025-02-19, 19:47:50, ziming4
+** 2025-03-15, 20:56:42, ziming4
+RESULTS SIMULATOR IMEX 202021
+
+
+
+
+
+
+
+********************************************************************************
+** I/O Control Section
+********************************************************************************
+   *TITLE1 'Discrete Fracture Network'
+
+   *INUNIT *SI
+   
+   *WPRN   *WELL   10
+   *WPRN   *GRID   *TIME
+   *WPRN   *ITER   *BRIEF
+   ***WPRN   *ITER   *MATRIX
+
+   *OUTPRN *WELL   *BRIEF
+   *OUTPRN *RES    *NONE
+   *OUTPRN *TABLES *NONE
+   *OUTPRN *GRID   *SW *SG *PRES *BPP *IMEXMAP
+
+   *WSRF   *GRID   *TIME
+   *WSRF   *WELL   1 
+   *OUTSRF *GRID    *SW *SG *PRES *BPP
+**  Distance units: m 
+RESULTS XOFFSET           0.0000
+RESULTS YOFFSET           0.0000
+RESULTS ROTATION           0.0000  **  (DEGREES)
+RESULTS AXES-DIRECTIONS 1.0 -1.0 1.0
+** ***************************************************************************
+** Definition of fundamental cartesian grid
+** ***************************************************************************
+GRID VARI 41 21 11
+KDIR DOWN
+DI IVAR 
+ 41*25
+DJ JVAR 
+ 21*25
+DK ALL 
+ 9471*10
+DTOP  
+ 861*0
+ 
+DUALPERM 
+SHAPE GK
+**  0 = null block, 1 = active block
+NULL *FRACTURE CON            1
+**  0 = null block, 1 = active block
+NULL *MATRIX CON            1
+
+POR *MATRIX CON        0.03
+
+POR *FRACTURE CON         0.0001
+*MOD
+6 3:19 5:7 = 0.01
+9 3:19 5:7 = 0.01
+12 3:19 5:7 = 0.01
+15 3:19 5:7 = 0.01
+18 3:19 5:7 = 0.01
+21 3:19 5:7 = 0.01
+24 3:19 5:7 = 0.01
+27 3:19 5:7 = 0.01
+30 3:19 5:7 = 0.01
+33 3:19 5:7 = 0.01
+36 3:19 5:7 = 0.01
+
+*CPOR  4.35e-7
+*PRPOR 101.35
+
+PERMI *MATRIX CON   0.00096463
+PERMJ *MATRIX CON   0.00096463
+PERMK *MATRIX CON   9.6463E-05
+
+PERMI *FRACTURE CON   0.096463
+*MOD
+6 3:19 5:7 = 1
+9 3:19 5:7 = 1
+12 3:19 5:7 = 1
+15 3:19 5:7 = 1
+18 3:19 5:7 = 1
+21 3:19 5:7 = 1
+24 3:19 5:7 = 1
+27 3:19 5:7 = 1
+30 3:19 5:7 = 1
+33 3:19 5:7 = 1
+36 3:19 5:7 = 1
+
+PERMJ *FRACTURE CON   0.096463
+*MOD
+6 3:19 5:7 = 1
+9 3:19 5:7 = 1
+12 3:19 5:7 = 1
+15 3:19 5:7 = 1
+18 3:19 5:7 = 1
+21 3:19 5:7 = 1
+24 3:19 5:7 = 1
+27 3:19 5:7 = 1
+30 3:19 5:7 = 1
+33 3:19 5:7 = 1
+36 3:19 5:7 = 1
+
+PERMK *FRACTURE CON   0.0096463
+*MOD
+6 3:19 5:7 = 1
+9 3:19 5:7 = 1
+12 3:19 5:7 = 1
+15 3:19 5:7 = 1
+18 3:19 5:7 = 1
+21 3:19 5:7 = 1
+24 3:19 5:7 = 1
+27 3:19 5:7 = 1
+30 3:19 5:7 = 1
+33 3:19 5:7 = 1
+36 3:19 5:7 = 1
+
+DIFRAC CON           5
+*MOD
+6 3:19 5:7 = 2
+9 3:19 5:7 = 2
+12 3:19 5:7 = 2
+15 3:19 5:7 = 2
+18 3:19 5:7 = 2
+21 3:19 5:7 = 2
+24 3:19 5:7 = 2
+27 3:19 5:7 = 2
+30 3:19 5:7 = 2
+33 3:19 5:7 = 2
+36 3:19 5:7 = 2
+DJFRAC CON           5
+*MOD
+6 3:19 5:7 = 2
+9 3:19 5:7 = 2
+12 3:19 5:7 = 2
+15 3:19 5:7 = 2
+18 3:19 5:7 = 2
+21 3:19 5:7 = 2
+24 3:19 5:7 = 2
+27 3:19 5:7 = 2
+30 3:19 5:7 = 2
+33 3:19 5:7 = 2
+36 3:19 5:7 = 2
+DKFRAC CON           10
+*MOD
+6 3:19 5:7 = 2
+9 3:19 5:7 = 2
+12 3:19 5:7 = 2
+15 3:19 5:7 = 2
+18 3:19 5:7 = 2
+21 3:19 5:7 = 2
+24 3:19 5:7 = 2
+27 3:19 5:7 = 2
+30 3:19 5:7 = 2
+33 3:19 5:7 = 2
+36 3:19 5:7 = 2
+**  0 = pinched block, 1 = active block
+PINCHOUTARRAY CON            1
+
+                                                  
+********************************************************************************
+** Component Properties section
+********************************************************************************
+	MODEL GASWATER 
+	PVTG BG 1
+
+**            p           Bg      visg
+	101.352932	0.962327	0.0080
+	1825.042256	0.143207	0.0096
+	3548.731579	0.077359	0.0112
+	6996.110225	0.040300	0.0140
+	13890.867520	0.020581	0.0189
+	17338.246170	0.016535	0.0208
+	20785.624810	0.013819	0.0228
+	27680.382100	0.010402	0.0268
+	34575.139400	0.009339	0.0309
+	62154.168570	0.006651	0.0470
+
+BWI 1.0410
+CVW 0.0
+CW 4.345E-7
+DENSITY WATER 996.9571234685225
+REFPW 101.35
+VWI 0.31
+** Gas Density
+DENSITY GAS 0.66966
+PTYPE *FRACTURE CON            1
+PTYPE *MATRIX CON            1
+                                                          
+
+********************************************************************************
+** Rock-fluid Properties Section
+********************************************************************************
+ *ROCKFLUID
+	RPT 1
+	**        Sw       krw      
+	SWT
+
+			0.12	0
+			0.15	0
+			0.25	0
+			0.3	0.0081
+			0.4	0.0256
+			0.5	0.0625
+			0.6	0.1296
+			0.7	0.343
+			0.8	0.6225
+			0.823	0.97
+			0.85	1
+			0.9	1
+			0.95	1
+			1	1
+   
+				
+	**        Sl       krg
+	SLT
+
+			0.12	1
+			0.15	1
+			0.25	0.99
+			0.3	0.9
+			0.4	0.76
+			0.5	0.55
+			0.55	0.33
+			0.6	0.2
+			0.7	0.09
+			0.75	0.045
+			0.8	0.003
+			0.85	0
+			0.88	0
+			1	0
+
+
+********************************************************************************
+** Initial Condition Section
+********************************************************************************
+*INITIAL
+USER_INPUT
+PRES *FRACTURE CON        43970
+*MOD
+4:7 3:19 5:7 = 45000
+8:10 3:19 5:7 = 45000
+11:13 3:19 5:7 = 45000
+14:16 3:19 5:7 = 45000
+17:19 3:19 5:7 = 45000
+20:22 3:19 5:7 = 45000
+23:25 3:19 5:7 = 45000
+26:28 3:19 5:7 = 45000
+29:31 3:19 5:7 = 45000
+32:34 3:19 5:7 = 45000
+35:37 3:19 5:7 = 45000
+
+PRES *MATRIX CON        43970
+SW *FRACTURE CON          0.3
+*MOD
+4:7 3:19 5:7 = 0.65
+8:10 3:19 5:7 = 0.65
+11:13 3:19 5:7 = 0.65
+14:16 3:19 5:7 = 0.65
+17:19 3:19 5:7 = 0.65
+20:22 3:19 5:7 = 0.65
+23:25 3:19 5:7 = 0.65
+26:28 3:19 5:7 = 0.65
+29:31 3:19 5:7 = 0.65
+32:34 3:19 5:7 = 0.65
+35:37 3:19 5:7 = 0.65
+
+SW *MATRIX CON         0.28
+*MOD
+4:7 3:19 5:7 = 0.3
+8:10 3:19 5:7 = 0.3
+11:13 3:19 5:7 = 0.3
+14:16 3:19 5:7 = 0.3
+17:19 3:19 5:7 = 0.3
+20:22 3:19 5:7 = 0.3
+23:25 3:19 5:7 = 0.3
+26:28 3:19 5:7 = 0.3
+29:31 3:19 5:7 = 0.3
+32:34 3:19 5:7 = 0.3
+35:37 3:19 5:7 = 0.3
+
+PB *FRACTURE CON        50000
+PB *MATRIX CON        50000
+********************************************************************************
+** Numerical Methods Control Section
+********************************************************************************
+NUMERICAL
+**Maximum time step size
+DTMAX 1
+**Maximum number of time steps
+MAXSTEPS 10000
+** Normal maximum changes per time step
+NORM PRESS 1000
+NORM SATUR 0.2
+** Use thresh hold switching criteria   
+AIM THRESH 
+
+
+********************************************************************************
+** Well Data Section
+********************************************************************************
+
+*RUN 
+** Start producing
+DATE 2021 1  1.00000
+
+WELL  'PROD'
+PRODUCER 'PROD'
+OPERATE  MIN  BHP  35000.0  CONT
+**          rad  geofac  wfrac  skin
+GEOMETRY  K  0.0726  0.37  1.0  0.0  
+      PERF      GEOA  'PROD'
+** UBA               ff          Status  Connection  
+    6 11 6          1.0  OPEN    FLOW-TO  'SURFACE'  REFLAYER
+    9 11 6          1.0  OPEN    FLOW-TO  1
+    12 11 6         1.0  OPEN    FLOW-TO  2
+    15 11 6         1.0  OPEN    FLOW-TO  3
+    18 11 6         1.0  OPEN    FLOW-TO  4
+    21 11 6         1.0  OPEN    FLOW-TO  5
+    24 11 6         1.0  OPEN    FLOW-TO  6
+    27 11 6         1.0  OPEN    FLOW-TO  7
+    30 11 6         1.0  OPEN    FLOW-TO  8
+    33 11 6         1.0  OPEN    FLOW-TO  9
+    36 11 6         1.0  OPEN    FLOW-TO  10
+OPEN 'PROD'
+DATE 2021 2  1.00000
+**
+WELL  'PROD'
+DATE 2021 3  1.00000
+**
+WELL  'PROD'
+DATE 2021 4  1.00000
+**
+WELL  'PROD'
+DATE 2021 5  1.00000
+**
+WELL  'PROD'
+DATE 2021 6  1.00000
+**
+WELL  'PROD'
+DATE 2021 7  1.00000
+**
+WELL  'PROD'
+DATE 2021 8  1.00000
+**
+WELL  'PROD'
+DATE 2021 9  1.00000
+**
+WELL  'PROD'
+DATE 2021 10  1.00000
+**
+WELL  'PROD'
+DATE 2021 11  1.00000
+**
+WELL  'PROD'
+DATE 2021 12  1.00000
+**
+WELL  'PROD'
+DATE 2022 1  1.00000
+**
+WELL  'PROD'
+DATE 2022 2  1.00000
+**
+WELL  'PROD'
+DATE 2022 3  1.00000
+**
+WELL  'PROD'
+DATE 2022 4  1.00000
+**
+WELL  'PROD'
+DATE 2022 5  1.00000
+**
+WELL  'PROD'
+DATE 2022 6  1.00000
+DATE 2022 7  1.00000
+DATE 2022 8  1.00000
+DATE 2022 9  1.00000
+DATE 2022 10  1.00000
+DATE 2022 11  1.00000
+DATE 2022 12  1.00000
+DATE 2023 1  1.00000
+DATE 2023 2  1.00000
+DATE 2023 3  1.00000
+DATE 2023 4  1.00000
+DATE 2023 5  1.00000
+DATE 2023 6  1.00000
+DATE 2023 7  1.00000
+DATE 2023 8  1.00000
+DATE 2023 9  1.00000
+DATE 2023 10  1.00000
+DATE 2023 11  1.00000
+DATE 2023 12  1.00000
+DATE 2024 1  1.00000
+DATE 2024 2  1.00000
+DATE 2024 3  1.00000
+DATE 2024 4  1.00000
+DATE 2024 5  1.00000
+DATE 2024 6  1.00000
+DATE 2024 7  1.00000
+DATE 2024 8  1.00000
+DATE 2024 9  1.00000
+DATE 2024 10  1.00000
+DATE 2024 11  1.00000
+DATE 2024 12  1.00000
+DATE 2025 1  1.00000
+DATE 2025 2  1.00000
+DATE 2025 3  1.00000
+DATE 2025 4  1.00000
+DATE 2025 5  1.00000
+STOP
+
+RESULTS SPEC 'Permeability J' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 0.001       
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP
+
+
+RESULTS SPEC 'Permeability K' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 0.0005      
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP
+
+
+RESULTS SPEC 'Permeability I' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 0.001       
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP
+
+
+RESULTS SPEC 'Porosity' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 0.3         
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP
+
+
+RESULTS SPEC 'Pressure' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 43970       
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP
+
+
+RESULTS SPEC 'Water Saturation' MATRIX
+RESULTS SPEC SPECNOTCALCVAL -99999      
+RESULTS SPEC REGION 'All Layers (Whole Grid)'
+RESULTS SPEC REGIONTYPE 'REGION_WHOLEGRID'
+RESULTS SPEC LAYERNUMB 0
+RESULTS SPEC PORTYPE 1
+RESULTS SPEC CON 0.2         
+RESULTS SPEC SPECKEEPMOD 'YES'
+RESULTS SPEC STOP

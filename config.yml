@@ -1,15 +1,56 @@
 static_variables:
   grid:
-    type: "uniform"
-    dimensions: [30, 30, 30]  # nx, ny, nz
-    spacing: [10.0, 10.0, 2.0]  # dx, dy, dz in meters
+    dimensions: [20, 20, 10]  # nx, ny, nz
+    spacing_x: 10.0  # dx
+    spacing_y: 10.0  # dy
+    spacing_z: 10.0  # dz
   
     # If using non-uniform grid, specify the size of each grid block individually
     # spacing_x: [10.0, 12.0, 8.0, ...]  # List of dx for each grid block in x-direction
     # spacing_y: [10.0, 9.0, 11.0, ...]  # List of dy for each grid block in y-direction
     # spacing_z: [2.0, 3.0, 1.5, ...]   # List of dz for each grid block in z-direction
 
-    null_blocks: [] # List of blocks to be treated as null (e.g., [[x1,y1,z1], [x2,y2,z2], ...])
+    # If the list of non uniform grid spacing is too long, you can also specify a file to read from
+    # spacing_x_file: "spacing_x.npy"    # Numpy file containing an array of size (nx,)
+    # spacing_y_file: "spacing_y.npy"    # Numpy file containing an array of size (ny,)
+    # spacing_z_file: "spacing_z.npy"    # Numpy file containing an array of size (nz,)
+
+    # null_blocks: "null_blocks.npy"  # array of shape (n_null, 3), [[x_i, y_i, z_i], ...] are null blocks
+
   
   physical_properties:
-  
+    permeability:
+      # The unit of permeability is Darcy
+
+      # Specify permeability from files
+      # k_i: "permeability_i.npy"  # Numpy file containing an array of size (nx, ny, nz) for permeability in x-direction
+      # k_j: "permeability_j.npy"  # Numpy file containing an array of size (nx, ny, nz) for permeability in y-direction
+      # k_k: "permeability_k.npy"  # Numpy file containing an array of size (nx, ny, nz) for permeability in z-direction
+
+      # Or specify uniform permeability values
+      k_i: 0.2  # Permeability in x-direction in Darcy
+      k_j: 0.2  # Permeability in y-direction in Darcy
+      k_k: 0.2  # Permeability in z-direction in Darcy
+    
+    porosity:
+      # Porosity is unitless, [0, 1]
+
+      # Specify porosity from file
+      # phi: "porosity.npy"  # Numpy file containing an array of size (nx, ny, nz) of porosity values
+
+      # Or specify uniform porosity value
+      phi: 0.2 
+    
+    viscosity:
+      # Viscosity unit is centiPoise (cP)
+      # Assume always two-phase flow, aqueous and oleic 
+      mu_w: 1e-3
+      mu_o: 5e-3 # TODO: THIS IS NOT THE FINAL VERSION. WILL UPDATE WHEN FIGURING OUT HOW TO HANDLE PRESSURE SPECIFIC VISC
+    
+    compressibility:
+      # Compressibility unit is 1/Pa
+      # Assume always two-phase flow, aqueous and oleic 
+      c_w: 1e-9  # water compressibility
+      c_o: 1e-9  # oil compressibility. TODO CHANGE THIS VALUE LATER
+      c_m: 7e-7  # rock matrix compressibility
+    
