@@ -28,9 +28,9 @@ static_variables:
       # k_k: "permeability_k.npy"  # Numpy file containing an array of size (nx, ny, nz) for permeability in z-direction
 
       # Or specify uniform permeability values
-      k_i: 0.2  # Permeability in x-direction in Darcy
-      k_j: 0.2  # Permeability in y-direction in Darcy
-      k_k: 0.2  # Permeability in z-direction in Darcy
+      k_x: 0.2  # Permeability in x-direction in Darcy
+      k_y: 0.2  # Permeability in y-direction in Darcy
+      k_z: 0.2  # Permeability in z-direction in Darcy
     
     porosity:
       # Porosity is unitless, [0, 1]
