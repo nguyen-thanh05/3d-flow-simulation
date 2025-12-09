@@ -1,8 +1,8 @@
 static_variables:
   grid:
-    dimensions: [20, 20, 10]  # nx, ny, nz
-    spacing_x: 10.0  # dx
-    spacing_y: 10.0  # dy
+    dimensions: [21, 21, 5]  # nx, ny, nz
+    spacing_x: 5.0  # dx
+    spacing_y: 5.0  # dy
     spacing_z: 10.0  # dz
     depth_top: 2000.0  # Depth of the top layer in m
     
@@ -29,9 +29,9 @@ static_variables:
       # k_k: "permeability_k.npy"  # Numpy file containing an array of size (nx, ny, nz) for permeability in z-direction
 
       # Or specify uniform permeability values
-      k_x: 0.2  # Permeability in x-direction in Darcy
-      k_y: 0.2  # Permeability in y-direction in Darcy
-      k_z: 0.2  # Permeability in z-direction in Darcy
+      k_x: 1e-13  # Permeability in x-direction in Darcy
+      k_y: 1e-13  # Permeability in y-direction in Darcy
+      k_z: 1e-13  # Permeability in z-direction in Darcy
     
     porosity:
       # Porosity is unitless, [0, 1]
@@ -40,12 +40,20 @@ static_variables:
       # phi: "porosity.npy"  # Numpy file containing an array of size (nx, ny, nz) of porosity values
 
       # Or specify uniform porosity value
-      phi: 0.2 
+      phi: 0.15
     
     pvt_table:
-      file: "pvt_data.csv"  # CSV file containing PVT data
+      file: "input_config/pvt_table.csv"  # CSV file containing PVT data
     
     rock_fluid_model:
       file: "input_config/rock_fluid.csv"
-      
-    
+  
+initial_conditions:
+  pressure: 1.2e7
+  S_w: 0.25
+
+well_controls:
+  injectors:
+    rate_grid: "input_config/rate_grid.npy"
+  producers:
+    bhp_grid: "input_config/bhp_grid.npy"

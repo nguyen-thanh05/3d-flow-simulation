@@ -16,13 +16,15 @@ from yaml_parser import (get_raw_yaml_content,
                          parse_well_controls)
 from material_balance import incremental_material_balance, incremental_saturation_material_balance
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 def capillary_pressure_fn(S1, P0=50000, S1r=0.2):
     return P0 * np.exp(-4 * (S1 - S1r))
 
 def main():
-    file_path = "validate/sample_config.yml" # If validation mode
-    # file_path = "input_config/config.yml"  # For normal run
+    # file_path = "validate/sample_config.yml" # If validation mode
+    file_path = "input_config/config.yml"  # For normal run
     
     content = get_raw_yaml_content(file_path)
     grid_config = create_grid(content)
@@ -44,10 +46,12 @@ def main():
     V_pore = calculate_pore_volume(nx, ny, nz, dx, dy, dz, porosity)
     
     inj_grid, bhp_map = parse_well_controls(content)
-    
+    all_pres_per_step = []
+    all_sat_per_step = []
+    all_prod_rate_per_step = []
     # Time stepping parameters
     dt = 43200  # 0.5 days in seconds
-    num_steps = 15  # Number of time steps to simulate
+    num_steps = 50  # Number of time steps to simulate
     total_mb_ratio = []
     water_mb_ratio = []
     # Time loop
@@ -88,50 +92,53 @@ def main():
         # Calculate production rate
         prod_grid = get_production_rate(P_new, S1_old, bhp_map, 
                                         capillary_pressure_fn, rel_perm, 
-                                        pvt_table, 7e-10)
+                                        pvt_table, J = 7e-10)
         
         S1_new = get_new_saturation(S1_old, P_new, P_old, inj_grid + prod_grid[0], 
                                      transmissibility, capillary_pressure_fn, 
                                      rel_perm, pvt_table, V_pore, depth_top, 
                                      dx, dy, dz, dt, nx, ny, nz)
         
-        # Print results for first time step
-        if step == 0:
-            print("\nPressure Field (Pa):")
-            print(P_new.flatten())
-            print("\nSaturation Field:")
-            print(S1_new.flatten())
-            print(f"\nProduction Rate at well (3,0,0):")
-            print(prod_grid[:, 3, 0, 0] * 24 * 3600)
         
-        # Update old values for next iteration
+        print(f"\nProduction Rate at well (10,10,2):")
+        print("Water Rate (m3/day)  |   Oil Rate (m3/day)")
+        print(prod_grid[0:2, 10, 10, 2] * 24 * 3600)
+        
+        all_pres_per_step.append(P_old.copy())
+        all_sat_per_step.append(S1_old.copy())
+        all_prod_rate_per_step.append(prod_grid[0:2, 10, 10, 2].copy())
         
         
         lhs, rhs, ratio = incremental_material_balance(S1_old, S1_new, P_old, P_new, V_pore, pvt_table, prod_grid, inj_grid, dt)
-        print(f"Step {step+1}: Material Balance Ratio = {ratio}, LHS = {lhs}, RHS = {rhs}")
+        print(f"Step {step+1}: Total Material Balance Ratio = {ratio}, LHS = {lhs}, RHS = {rhs}")
         total_mb_ratio.append(ratio)
         lhs, rhs, ratio = incremental_saturation_material_balance(S1_old, S1_new, P_new, V_pore, pvt_table, prod_grid, inj_grid, dt)
-        print(f"Step {step+1}: Material Balance Ratio = {ratio}, LHS = {lhs}, RHS = {rhs}")
+        print(f"Step {step+1}: Water Material Balance Ratio = {ratio}, LHS = {lhs}, RHS = {rhs}")
         water_mb_ratio.append(ratio)
         
         P_old = P_new.copy()
         S1_old = S1_new.copy()
-    
     print(f"\n{'='*60}")
     print("Simulation Complete")
     print(f"{'='*60}")
     
-    import matplotlib.pyplot as plt
+    all_pres_per_step = np.array(all_pres_per_step)
+    all_sat_per_step = np.array(all_sat_per_step)
+    all_prod_rate_per_step = np.array(all_prod_rate_per_step)
+    np.save("output_data/pressure_per_timestep.npy", all_pres_per_step)
+    np.save("output_data/saturation_per_timestep.npy", all_sat_per_step)
+    np.save("output_data/production_rate_per_timestep.npy", all_prod_rate_per_step)
+    
     plt.figure(figsize=(10, 5))
     plt.plot(range(1, num_steps + 1), total_mb_ratio, marker='o', label='Total Material Balance Ratio')
     plt.plot(range(1, num_steps + 1), water_mb_ratio, marker='x', label='Water Material Balance Ratio')
-    plt.ylim(0.99, 1.02)
     plt.xlabel('Time Step')
     plt.ylabel('Material Balance Ratio')
     plt.title('Incremental MB Ratio over Time Steps')
     plt.legend()
     plt.grid(True)
     plt.show()
+    
 
 if __name__ == "__main__":
     main()
