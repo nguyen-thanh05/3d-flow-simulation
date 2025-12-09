@@ -4,7 +4,8 @@ static_variables:
     spacing_x: 10.0  # dx
     spacing_y: 10.0  # dy
     spacing_z: 10.0  # dz
-  
+    depth_top: 2000.0  # Depth of the top layer in m
+    
     # If using non-uniform grid, specify the size of each grid block individually
     # spacing_x: [10.0, 12.0, 8.0, ...]  # List of dx for each grid block in x-direction
     # spacing_y: [10.0, 9.0, 11.0, ...]  # List of dy for each grid block in y-direction
@@ -41,16 +42,10 @@ static_variables:
       # Or specify uniform porosity value
       phi: 0.2 
     
-    viscosity:
-      # Viscosity unit is centiPoise (cP)
-      # Assume always two-phase flow, aqueous and oleic 
-      mu_w: 1e-3
-      mu_o: 5e-3 # TODO: THIS IS NOT THE FINAL VERSION. WILL UPDATE WHEN FIGURING OUT HOW TO HANDLE PRESSURE SPECIFIC VISC
+    pvt_table:
+      file: "pvt_data.csv"  # CSV file containing PVT data
     
-    compressibility:
-      # Compressibility unit is 1/Pa
-      # Assume always two-phase flow, aqueous and oleic 
-      c_w: 1e-9  # water compressibility
-      c_o: 1e-9  # oil compressibility. TODO CHANGE THIS VALUE LATER
-      c_m: 7e-7  # rock matrix compressibility
+    rock_fluid_model:
+      file: "input_config/rock_fluid.csv"
+      
     

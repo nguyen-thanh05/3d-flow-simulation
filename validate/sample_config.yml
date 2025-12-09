@@ -1,0 +1,41 @@
+static_variables:
+  grid:
+    dimensions: [5, 1, 1]  # nx, ny, nz
+    spacing_x: 20.0  # dx
+    spacing_y: 20.0  # dy
+    spacing_z: 20.0  # dz
+    depth_top: 0.0  # Depth of the top layer in m
+    
+  physical_properties:
+    permeability:
+      k_x: 1e-13  # Permeability in x-direction in m2
+      k_y: 1e-13  # Permeability in y-direction in m2
+      k_z: 1e-13  # Permeability in z-direction in m2
+    
+    porosity:
+      phi: 0.15
+    
+    pvt_table:
+      file: "validate/sample_pvt.csv"  # CSV file containing PVT data
+    
+    rock_fluid_model:
+      file: "validate/sample_rock_fluid.csv"
+    
+initial_conditions:
+  pressure: 2e6
+  S_w: 0.25
+
+well_controls:
+  injectors:
+    rate_grid: "validate/rate_grid.npy"
+    # inj_grid = np.zeros((nx, ny, nz))
+    # inj_grid[1, 0, 0] = 25 / 24 / 3600 # m3/s
+    # np.save("rate_grid.npy", inj_grid)
+
+  producers:
+    bhp_grid: "validate/bhp_grid.npy"
+    # bhp_map = np.zeros((nx, ny, nz))
+    # bhp_map[3, 0, 0] = 8.00E+05  # Pa
+    # np.save("bhp_grid.npy", bhp_map)
+
+    
